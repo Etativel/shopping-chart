@@ -1,6 +1,10 @@
 .nav-container {
   display: flex;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  color: white;
+  background-color: black;
 }
 
 li {

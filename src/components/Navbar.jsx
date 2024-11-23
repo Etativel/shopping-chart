@@ -1,5 +1,6 @@
 import "../styles/Navigation.css";
-function Navigation() {
+import PropTypes from "prop-types";
+function Navigation({ cart }) {
   return (
     <div className="nav-container">
       <ul className="left-nav">
@@ -9,10 +10,14 @@ function Navigation() {
       </ul>
       <ul className="right-nav">
         <li>Search bar</li>
-        <li>Cart</li>
+        <li>{cart.length}</li>
       </ul>
     </div>
   );
 }
+
+Navigation.propTypes = {
+  cart: PropTypes.array,
+};
 
 export { Navigation };

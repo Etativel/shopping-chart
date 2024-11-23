@@ -9,6 +9,10 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [{ path: "product/:id", element: <ProductCheckout /> }],
   },
+  {
+    path: "/not-found",
+    element: <ErrorPage message="Product not found" />,
+  },
 ];
 
 export default routes;

@@ -1,37 +1,43 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductsContext } from "../context/ProductsContext";
 import PropTypes from "prop-types";
 
-function ProductCheckout({ handleAddCart, cartData }) {
+function ProductCheckout({ handleAddCart }) {
   const { data } = useContext(ProductsContext);
   const [productToCheckout, setProductToCheckout] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const productId = useParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (data && data.length > 0) {
+      const filteredProd = data.filter((prod) => prod.id == productId.id);
+      if (filteredProd.length > 0) {
+        setProductToCheckout(filteredProd[0]);
+      } else {
+        navigate("/not-found", { replace: true });
+      }
+    }
+  }, [data, productId, navigate]);
 
   function handleChange(e) {
     setQuantity(e.target.value);
   }
 
   function handleSubmit(e) {
+    console.log(productToCheckout);
     e.preventDefault();
-    console.log(cartData);
-    handleAddCart(quantity, productToCheckout[0].id);
+    handleAddCart(quantity, productToCheckout.id);
   }
-  useEffect(() => {
-    if (data && data.length > 0) {
-      const filteredProd = data.filter((prod) => prod.id == productId.id);
-      setProductToCheckout(filteredProd);
-    }
-  }, [data, productId]);
 
   if (!productToCheckout || productToCheckout.length === 0) {
-    return <h1>Loading...</h1>;
+    return;
   }
   return (
     <div className="prod-checkout-container">
-      <h1>{productToCheckout[0].title}</h1>
-      <h2>{productToCheckout[0].price}</h2>
+      <h1>{productToCheckout.title}</h1>
+      <h2>{productToCheckout.price}</h2>
+      <img src={productToCheckout.image} alt="productImage" />
       <form action="submit" onSubmit={handleSubmit}>
         <input
           type="number"

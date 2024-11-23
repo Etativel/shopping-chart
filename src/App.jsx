@@ -39,7 +39,7 @@ function App() {
   return (
     <>
       <div className="appContainer">
-        <Navigation />
+        <Navigation cart={cart} />
         {loading && <div>Loading...</div>}
         {error && <div>{error}</div>}
         {Object.keys(id).length > 0 ? (
