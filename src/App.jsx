@@ -1,28 +1,41 @@
-import { useEffect, useState } from "react";
-import { fetchProducts } from "./services/api";
+import { useContext, useEffect, useState } from "react";
 import { Navigation } from "./components/Navbar";
 import "./styles/App.css";
 import { useParams } from "react-router-dom";
 import { Products } from "./components/Products";
 import { ProductCheckout } from "./pages/ProductCheckout";
+import { ProductsContext } from "./context/ProductsContext";
 
 function App() {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
   const id = useParams();
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cartProduct")) || []
+  );
+  const { data, loading, error } = useContext(ProductsContext);
+
   useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
+    localStorage.setItem("cartProduct", JSON.stringify(cart));
+  }, [cart]);
 
-      const { data, error } = await fetchProducts();
-      setData(data);
-      setError(error);
-      setLoading(false);
-    };
-    loadData();
-  }, []);
+  function handleAddCart(quantity, id) {
+    const existingItemIndex = cart.findIndex((item) => item.productId === id);
 
+    if (existingItemIndex !== -1) {
+      const updatedCart = cart.map((item, index) => {
+        if (index === existingItemIndex) {
+          return {
+            ...item,
+            quantityToBuy: parseInt(quantity),
+          };
+        }
+        return item;
+      });
+      setCart(updatedCart);
+    } else {
+      const newCart = [...cart, { quantityToBuy: quantity, productId: id }];
+      setCart(newCart);
+    }
+  }
   return (
     <>
       <div className="appContainer">
@@ -30,7 +43,7 @@ function App() {
         {loading && <div>Loading...</div>}
         {error && <div>{error}</div>}
         {Object.keys(id).length > 0 ? (
-          <ProductCheckout />
+          <ProductCheckout handleAddCart={handleAddCart} cartData={cart} />
         ) : (
           <Products data={data} />
         )}
