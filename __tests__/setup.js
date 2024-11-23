@@ -7,3 +7,7 @@ expect.extend(matchers);
 afterEach(() => {
   cleanup();
 });
+
+export default function setup() {
+  return;
+}
