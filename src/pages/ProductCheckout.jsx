@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductsContext } from "../context/ProductsContext";
+
 import PropTypes from "prop-types";
 
 function ProductCheckout({ handleAddCart }) {
@@ -27,7 +28,7 @@ function ProductCheckout({ handleAddCart }) {
   function handleSubmit(e) {
     console.log(productToCheckout);
     e.preventDefault();
-    handleAddCart(quantity, productToCheckout.id);
+    handleAddCart(quantity, productToCheckout.id, productToCheckout.price);
   }
 
   if (!productToCheckout || productToCheckout.length === 0) {

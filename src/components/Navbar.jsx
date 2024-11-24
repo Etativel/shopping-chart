@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import "../styles/Navigation.css";
 import PropTypes from "prop-types";
+
 function Navigation({ cart }) {
   return (
     <div className="nav-container">
@@ -10,7 +12,12 @@ function Navigation({ cart }) {
       </ul>
       <ul className="right-nav">
         <li>Search bar</li>
-        <li>{cart.length}</li>
+        <li>
+          <Link to="checkout" data={2}>
+            {cart.length}
+          </Link>
+        </li>
+        {/* <li>{getTotalPrice(cart)}</li> */}
       </ul>
     </div>
   );

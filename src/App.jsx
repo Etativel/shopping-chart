@@ -11,13 +11,16 @@ function App() {
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cartProduct")) || []
   );
+
   const { data, loading, error } = useContext(ProductsContext);
 
   useEffect(() => {
     localStorage.setItem("cartProduct", JSON.stringify(cart));
   }, [cart]);
 
-  function handleAddCart(quantity, id) {
+  console.log(cart);
+
+  function handleAddCart(quantity, id, price) {
     const existingItemIndex = cart.findIndex((item) => item.productId === id);
 
     if (existingItemIndex !== -1) {
@@ -26,13 +29,22 @@ function App() {
           return {
             ...item,
             quantityToBuy: parseInt(quantity),
+            total: price * parseInt(quantity),
           };
         }
         return item;
       });
       setCart(updatedCart);
     } else {
-      const newCart = [...cart, { quantityToBuy: quantity, productId: id }];
+      const newCart = [
+        ...cart,
+        {
+          quantityToBuy: quantity,
+          productId: id,
+          price: price,
+          total: price * quantity,
+        },
+      ];
       setCart(newCart);
     }
   }
