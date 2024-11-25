@@ -17,6 +17,16 @@ function Checkout({ cart, handleClearCart, handleDeleteCart }) {
     );
     setUpdateCart(newCart);
   }
+
+  function handleDeleteAndUpdate(id) {
+    const filteredCart = updateCart.filter((item) => item.productId !== id);
+    setUpdateCart(filteredCart);
+    handleDeleteCart(id);
+    if (filteredCart.length === 0) {
+      navigate("/");
+    }
+  }
+
   function handleCheckout() {
     const totalPrice = getTotalPrice(updateCart);
 
@@ -28,6 +38,7 @@ function Checkout({ cart, handleClearCart, handleDeleteCart }) {
 
   return (
     <div className="checkout-container">
+      <h1>{getTotalPrice(updateCart)}</h1>
       <button onClick={handleCheckout}>checkout</button>
 
       <ul key={1}>
@@ -44,7 +55,7 @@ function Checkout({ cart, handleClearCart, handleDeleteCart }) {
                 onChange={(e) => handleChange(e, item)}
               />
               {/* <button>update</button> */}
-              <button onClick={() => handleDeleteCart(item.productId)}>
+              <button onClick={() => handleDeleteAndUpdate(item.productId)}>
                 Delete
               </button>
             </li>
