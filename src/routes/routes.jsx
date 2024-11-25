@@ -1,6 +1,6 @@
 import App from "../App";
 import { Checkout } from "../pages/Checkout";
-import ErrorPage from "../pages/ErrorPage";
+import { ErrorPage } from "../pages/ErrorPage";
 import { ProductCheckout } from "../pages/ProductCheckout";
 
 const routes = [
@@ -13,15 +13,15 @@ const routes = [
         path: "product/:id",
         element: <ProductCheckout />,
       },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
     ],
   },
   {
     path: "/not-found",
     element: <ErrorPage message="Product not found" />,
-  },
-  {
-    path: "/checkout",
-    element: <Checkout />,
   },
 ];
 

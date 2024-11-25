@@ -8,4 +8,4 @@ ErrorPage.propTypes = {
   message: PropTypes.string,
 };
 
-export default ErrorPage;
+export { ErrorPage };

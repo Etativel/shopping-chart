@@ -13,9 +13,7 @@ function Navigation({ cart }) {
       <ul className="right-nav">
         <li>Search bar</li>
         <li>
-          <Link to="checkout" data={2}>
-            {cart.length}
-          </Link>
+          <Link to="checkout">{cart.length}</Link>
         </li>
         {/* <li>{getTotalPrice(cart)}</li> */}
       </ul>

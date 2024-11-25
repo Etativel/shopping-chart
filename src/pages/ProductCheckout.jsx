@@ -6,9 +6,11 @@ import PropTypes from "prop-types";
 
 function ProductCheckout({ handleAddCart }) {
   const { data } = useContext(ProductsContext);
+  const productId = useParams();
+
   const [productToCheckout, setProductToCheckout] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const productId = useParams();
+
   const navigate = useNavigate();
   useEffect(() => {
     if (data && data.length > 0) {
@@ -28,7 +30,12 @@ function ProductCheckout({ handleAddCart }) {
   function handleSubmit(e) {
     console.log(productToCheckout);
     e.preventDefault();
-    handleAddCart(quantity, productToCheckout.id, productToCheckout.price);
+    handleAddCart(
+      quantity,
+      productToCheckout.id,
+      productToCheckout.price,
+      productToCheckout.image
+    );
   }
 
   if (!productToCheckout || productToCheckout.length === 0) {
