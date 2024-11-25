@@ -19,9 +19,22 @@ function App() {
     localStorage.setItem("cartProduct", JSON.stringify(cart));
   }, [cart]);
 
-  console.log(cart);
+  function handleDeleteCart(id) {
+    const filtered = cart.filter((cart) => cart.productId !== id);
+    setCart(filtered);
+  }
 
-  function handleAddAndEditCart(quantity, id, price, productImage) {
+  function handleClearCart() {
+    setCart([]); // Clear the cart state
+  }
+
+  function handleAddAndEditCart(
+    quantity,
+    id,
+    price,
+    productImage,
+    productName
+  ) {
     const existingItemIndex = cart.findIndex((item) => item.productId === id);
 
     if (existingItemIndex !== -1) {
@@ -45,6 +58,7 @@ function App() {
           price: price,
           total: price * quantity,
           productImage: productImage,
+          productName: productName,
         },
       ];
       setCart(newCart);
@@ -74,6 +88,8 @@ function App() {
               <Checkout
                 cart={cart}
                 handleEditCart={handleAddAndEditCart}
+                handleDeleteCart={handleDeleteCart}
+                handleClearCart={handleClearCart}
                 data={data}
               />
             }

@@ -34,7 +34,8 @@ function ProductCheckout({ handleAddCart }) {
       quantity,
       productToCheckout.id,
       productToCheckout.price,
-      productToCheckout.image
+      productToCheckout.image,
+      productToCheckout.title
     );
   }
 
