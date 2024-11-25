@@ -7,8 +7,15 @@ import { ProductsContext } from "./context/ProductsContext";
 import { Route, Routes } from "react-router-dom";
 import { Checkout } from "./pages/Checkout";
 import { ErrorPage } from "./pages/ErrorPage";
+import { filterProducts } from "./utils/filterProduct";
 
 function App() {
+  const [query, setQuery] = useState("");
+
+  function handleQueryChange(e) {
+    setQuery(e.target.value);
+  }
+
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cartProduct")) || []
   );
@@ -25,7 +32,7 @@ function App() {
   }
 
   function handleClearCart() {
-    setCart([]); // Clear the cart state
+    setCart([]);
   }
 
   function handleAddAndEditCart(
@@ -67,12 +74,25 @@ function App() {
   return (
     <>
       <div className="appContainer">
-        <Navigation cart={cart} />
+        <Navigation
+          cart={cart}
+          query={query}
+          handleQueryChange={handleQueryChange}
+        />
         {loading && <div>Loading...</div>}
         {error && <div>{error}</div>}
 
         <Routes>
-          <Route path="/" element={<Products data={data} />} />
+          <Route
+            path="/"
+            element={
+              data ? (
+                <Products data={filterProducts(data, query)} query={query} />
+              ) : (
+                <div></div>
+              )
+            }
+          />
           <Route
             path="product/:id"
             element={

@@ -38,7 +38,7 @@ function Checkout({ cart, handleClearCart, handleDeleteCart }) {
 
   return (
     <div className="checkout-container">
-      <h1>{getTotalPrice(updateCart)}</h1>
+      <h1>{getTotalPrice(updateCart).toFixed(2)}</h1>
       <button onClick={handleCheckout}>checkout</button>
 
       <ul key={1}>

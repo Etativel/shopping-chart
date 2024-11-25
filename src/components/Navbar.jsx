@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../styles/Navigation.css";
 import PropTypes from "prop-types";
 
-function Navigation({ cart }) {
+function Navigation({ cart, query, handleQueryChange }) {
   return (
     <div className="nav-container">
       <ul className="left-nav">
@@ -11,7 +11,7 @@ function Navigation({ cart }) {
         <li>WOMEN</li>
       </ul>
       <ul className="right-nav">
-        <li>Search bar</li>
+        <input type="text" value={query} onChange={handleQueryChange} />
         <li>
           <Link to="checkout">{cart.length}</Link>
         </li>
@@ -23,6 +23,8 @@ function Navigation({ cart }) {
 
 Navigation.propTypes = {
   cart: PropTypes.array,
+  query: PropTypes.string,
+  handleQueryChange: PropTypes.func,
 };
 
 export { Navigation };
