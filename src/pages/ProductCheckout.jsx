@@ -54,10 +54,10 @@ function ProductCheckout({ handleAddCart }) {
         <div className="desc">{productToCheckout.description}</div>
       </div>
       <div className="p-right">
-        <h1>{productToCheckout.title}</h1>
+        <h1 className="prod-title">{productToCheckout.title}</h1>
         <div className="container-price">
           <div className="price-n-quant">
-            <div className="price">{productToCheckout.price}</div>
+            <div className="price">{productToCheckout.price} $</div>
             <div className="quantity">
               <form
                 action="submit"

@@ -55,7 +55,7 @@ form {
 
 .quantity-form {
   display: flex;
-  background-color: yellow;
+  /* background-color: yellow; */
   gap: 8px;
   padding: 12px;
 }
@@ -63,6 +63,30 @@ form {
 .quantity-input {
   font-size: 1.5rem;
   padding: 6px;
+  border-radius: 6px;
+  /* border: 0px; */
+}
+
+.add-cart-btn {
+  background-color: greenyellow;
+  border: solid greenyellow 1px;
+}
+
+.add-cart-btn:hover {
+  background-color: white;
+  color: black;
+  border: solid greenyellow 1px;
+}
+
+.cn-btn {
+  background-color: aqua;
+  border: solid aqua 1px;
+}
+
+.cn-btn:hover {
+  background-color: white;
+  color: black;
+  border: solid aqua 1px;
 }
 
 .cn-btn,
@@ -70,6 +94,9 @@ form {
   font-size: 1rem;
   padding: 12px;
   min-width: 100px;
+  border-radius: 6px;
+  border: 0px;
+  cursor: pointer;
 }
 
 .cn-btn {
