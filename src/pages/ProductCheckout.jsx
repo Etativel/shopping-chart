@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ProductsContext } from "../context/ProductsContext";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import "../styles/ProductCheckout.css";
 
 function ProductCheckout({ handleAddCart }) {
   const { data } = useContext(ProductsContext);
@@ -44,22 +45,44 @@ function ProductCheckout({ handleAddCart }) {
   }
   return (
     <div className="prod-checkout-container">
-      <h1>{productToCheckout.title}</h1>
-      <h2>{productToCheckout.price}</h2>
-      <img src={productToCheckout.image} alt="productImage" />
-      <form action="submit" onSubmit={handleSubmit}>
-        <input
-          type="number"
-          min={1}
-          value={quantity}
-          max={100}
-          onChange={handleChange}
+      <div className="p-left">
+        <img
+          src={productToCheckout.image}
+          alt="productImage"
+          className="prod-img"
         />
-        <button>Add to cart</button>
-      </form>
-      <Link to="/checkout">
-        <button className="cn-btn">Checkot Now</button>
-      </Link>
+        <div className="desc">{productToCheckout.description}</div>
+      </div>
+      <div className="p-right">
+        <h1>{productToCheckout.title}</h1>
+        <div className="container-price">
+          <div className="price-n-quant">
+            <div className="price">{productToCheckout.price}</div>
+            <div className="quantity">
+              <form
+                action="submit"
+                className="quantity-form"
+                onSubmit={handleSubmit}
+              >
+                <input
+                  type="number"
+                  min={1}
+                  value={quantity}
+                  max={100}
+                  onChange={handleChange}
+                  className="quantity-input"
+                />
+
+                <button className="add-cart-btn">+ Add to cart</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <Link to="/checkout">
+          <button className="cn-btn">Checkot Now</button>
+        </Link>
+      </div>
     </div>
   );
 }

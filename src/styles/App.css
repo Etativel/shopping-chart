@@ -28,3 +28,7 @@ img {
 .cn-btn {
   cursor: pointer;
 }
+
+.appContainer {
+  width: 100%;
+}
