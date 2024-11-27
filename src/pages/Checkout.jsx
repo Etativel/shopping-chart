@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTotalPrice } from "../utils/calculatePrice";
-function Checkout({ cart, handleClearCart, handleDeleteCart }) {
+import { Link } from "react-router-dom";
+function Checkout({ cart, handleClearCart, handleDeleteCart, setQuery }) {
   const [updateCart, setUpdateCart] = useState(cart);
   const navigate = useNavigate();
   function handleChange(e, item) {
@@ -23,13 +24,13 @@ function Checkout({ cart, handleClearCart, handleDeleteCart }) {
     setUpdateCart(filteredCart);
     handleDeleteCart(id);
     if (filteredCart.length === 0) {
-      navigate("/");
+      navigate(-1);
     }
   }
 
   function handleCheckout() {
     const totalPrice = getTotalPrice(updateCart);
-
+    setQuery("");
     handleClearCart();
 
     alert(`Your total is ${totalPrice}`);
@@ -38,8 +39,19 @@ function Checkout({ cart, handleClearCart, handleDeleteCart }) {
 
   return (
     <div className="checkout-container">
-      <h1>{getTotalPrice(updateCart).toFixed(2)}</h1>
-      <button onClick={handleCheckout}>checkout</button>
+      {updateCart.length <= 0 ? (
+        <>
+          <h1>There is no product yet</h1>
+          <Link to="/">
+            <button>Back to shop</button>
+          </Link>
+        </>
+      ) : (
+        <>
+          <h1>{getTotalPrice(updateCart).toFixed(2)}</h1>
+          <button onClick={handleCheckout}>checkout</button>
+        </>
+      )}
 
       <ul key={1}>
         {updateCart.map((item) => {
@@ -71,6 +83,7 @@ Checkout.propTypes = {
   handleEditCart: PropTypes.func,
   handleDeleteCart: PropTypes.func,
   handleClearCart: PropTypes.func,
+  setQuery: PropTypes.func,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

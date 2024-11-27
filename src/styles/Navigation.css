@@ -5,8 +5,60 @@
   top: 0;
   color: white;
   background-color: black;
+  align-items: center;
+  padding: 12px 0px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.logo {
+  font-size: 2rem;
+  padding-left: 18px;
 }
 
 li {
   list-style: none;
+}
+
+.cart-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.cart-container {
+  display: flex;
+  text-decoration: none;
+  padding-right: 12px;
+}
+
+.cart-length {
+  transform: translateY(-10px);
+  /* transform: translateX(-5px); */
+  color: white;
+}
+
+.right-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.queryInput {
+  max-height: 24px;
+  padding-left: 12px;
+  flex-grow: 1;
+}
+
+.left-nav {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  gap: 24px;
+  /* background-color: blue; */
+}
+
+.cat-btn {
+  cursor: pointer;
 }

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import ProductCard from "./ProductCard";
 function Products({ data }) {
   return (
-    <ul className="product-container">
+    <ul className="product-parent-container">
       {data ? (
         data.map((item) => (
           <li key={item.id}>

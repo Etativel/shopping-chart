@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductsContext } from "../context/ProductsContext";
-
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function ProductCheckout({ handleAddCart }) {
@@ -57,6 +57,9 @@ function ProductCheckout({ handleAddCart }) {
         />
         <button>Add to cart</button>
       </form>
+      <Link to="/checkout">
+        <button className="cn-btn">Checkot Now</button>
+      </Link>
     </div>
   );
 }

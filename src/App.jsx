@@ -78,6 +78,7 @@ function App() {
           cart={cart}
           query={query}
           handleQueryChange={handleQueryChange}
+          setQuery={setQuery}
         />
         {loading && <div>Loading...</div>}
         {error && <div>{error}</div>}
@@ -87,7 +88,7 @@ function App() {
             path="/"
             element={
               data ? (
-                <Products data={filterProducts(data, query)} query={query} />
+                <Products data={filterProducts(data, query)} />
               ) : (
                 <div></div>
               )
@@ -111,6 +112,7 @@ function App() {
                 handleDeleteCart={handleDeleteCart}
                 handleClearCart={handleClearCart}
                 data={data}
+                setQuery={setQuery}
               />
             }
           />
