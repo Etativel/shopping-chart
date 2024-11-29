@@ -1,12 +1,9 @@
 .prod-checkout-container {
   display: flex;
-  /* background-color: blue; */
   margin: 0px 250px;
   height: fit-content;
-  /* flex-wrap: wrap; */
   padding: 32px;
   gap: 100px;
-  /* width: 100%; */
   justify-content: space-around;
 
   border: solid black 1px;
@@ -22,14 +19,11 @@
   display: flex;
   flex-direction: column;
   padding: 24px;
-  /* background-color: red; */
-
   gap: 32px;
 }
 
 .container-price {
   display: flex;
-  /* background-color: blueviolet; */
 }
 
 .price {
