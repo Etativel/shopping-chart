@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getTotalPrice } from "../utils/calculatePrice";
 import { Link } from "react-router-dom";
 function Checkout({ cart, handleClearCart, handleDeleteCart, setQuery }) {
   const [updateCart, setUpdateCart] = useState(cart);
   const navigate = useNavigate();
+  const totalPrice = useMemo(() => {
+    return getTotalPrice(updateCart);
+  }, [updateCart]);
   function handleChange(e, item) {
     const quantity = Number(e.target.value);
     const updated = {
@@ -29,7 +32,7 @@ function Checkout({ cart, handleClearCart, handleDeleteCart, setQuery }) {
   }
 
   function handleCheckout() {
-    const totalPrice = getTotalPrice(updateCart);
+    // const totalPrice = getTotalPrice(updateCart);
     setQuery("");
     handleClearCart();
 
@@ -48,7 +51,7 @@ function Checkout({ cart, handleClearCart, handleDeleteCart, setQuery }) {
         </>
       ) : (
         <>
-          <h1>{getTotalPrice(updateCart).toFixed(2)}</h1>
+          <h1>{totalPrice.toFixed(2)}</h1>
           <button onClick={handleCheckout}>checkout</button>
         </>
       )}
